@@ -1,6 +1,8 @@
+import { OrderItemIngestionResult } from "./OrderItemIngestionResult.js";
+
 export interface OrderIngestionResult {
   orderId: string;
   totalCharged: number;
   orderedAt: Date;
-  items: OrderIngestionResult[];
+  orderItems: OrderItemIngestionResult[];
 }

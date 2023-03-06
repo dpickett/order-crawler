@@ -37,12 +37,12 @@ export class InvoiceParser {
       orderId: fieldValues.orderId,
       totalCharged: parseFloat(fieldValues.totalCharged.replace("$", "")),
       orderedAt: parse(fieldValues.orderedAtText, "MMMM d, yyyy", new Date()),
-      items: [],
+      orderItems: [],
     } as OrderIngestionResult;
 
     const itemNameSelector = "table table table td i";
 
-    let items = [];
+    let orderItems = [];
     const itemNames = await this.page.locator(itemNameSelector).all();
     for (const itemName of itemNames) {
       const name = await itemName.textContent();
@@ -51,8 +51,8 @@ export class InvoiceParser {
       });
       const rawTotal = await row.locator("td:last-child").textContent();
       const itemTotal = parseFloat(rawTotal.trim().replace("$", ""));
-      items = [
-        ...items,
+      orderItems = [
+        ...orderItems,
         {
           name: await itemName.textContent(),
           itemTotal,
@@ -62,7 +62,7 @@ export class InvoiceParser {
 
     adjustedFields = {
       ...adjustedFields,
-      items,
+      orderItems,
     };
 
     return adjustedFields;
