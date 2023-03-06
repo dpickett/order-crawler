@@ -18,7 +18,7 @@ export class Order extends Model {
     return this.getClient().order.findMany({
       where: {
         totalCharged: { equals: totalCharged },
-        orderedAt: { equals: orderedAt },
+        // orderedAt: { equals: orderedAt },
       },
       include: { orderItems: true },
     });

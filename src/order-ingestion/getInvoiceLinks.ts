@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { InvoiceParser } from "./InvoiceParser.js";
+import { getBaseHost } from "./getBaseHost.js";
 
 export const getInvoiceLinks = async (page: Page) => {
   const orderLinkSelector =
@@ -11,7 +11,7 @@ export const getInvoiceLinks = async (page: Page) => {
   const paths = await Promise.all(
     anchors.map(async (anchor) => anchor.getAttribute("href"))
   );
-  const baseHost = page.url().match(/https:\/\/[^\/]*\//);
+  const baseHost = getBaseHost(page);
 
   return paths.map((path) => `${baseHost[0]}${path}`);
 };

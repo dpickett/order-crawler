@@ -12,7 +12,9 @@ export const OrderList = ({ orders }: { orders: Order[] }) => {
     });
     return (
       <div key={order.id}>
-        <h2>{order.orderId}</h2>
+        <h2>
+          {order.orderedAt} {order.orderId}
+        </h2>
         <ul>{orderItems}</ul>
       </div>
     );

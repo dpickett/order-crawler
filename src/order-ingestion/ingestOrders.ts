@@ -17,7 +17,11 @@ export const ingestOrders = async () => {
   try {
     credentials.forEach(async (credential) => {
       let orders: OrderIngestionResult[];
-      await test("crawl orders", async ({ page }: { page: Page }) => {
+      await test(`crawl orders for ${credential.email}`, async ({
+        page,
+      }: {
+        page: Page;
+      }) => {
         const orderIngestion = new OrderCrawl(credential, page);
         orders = await orderIngestion.crawl();
 

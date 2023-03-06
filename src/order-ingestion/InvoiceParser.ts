@@ -49,7 +49,7 @@ export class InvoiceParser {
       const row = await this.page.locator("table table table table table tr", {
         hasText: name,
       });
-      const rawTotal = await row.locator("td:last-child").textContent();
+      const rawTotal = await row.locator("td:last-child").first().textContent();
       const itemTotal = parseFloat(rawTotal.trim().replace("$", ""));
       orderItems = [
         ...orderItems,
